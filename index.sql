@@ -82,16 +82,16 @@ ADD Director_First VARCHAR(80),
 ADD Director_Last VARCHAR(80);
 
 INSERT INTO movies2( Title, ReleaseDate, Rating, Director_First, Director_Last) VALUES
-    ('Vanilla Sky', '2001', '6.9', 'Cameron Crowe'),
-    ('Top Gun', '1986', '6.9', 'Tony Scott'),
-    ('Risky Business', '1983', '6.8', 'Paul Brickman'),
-    ('Cocktail', '1986', '5.9', 'Roger Donaldson'),
-    ('Tropic Thunder', '2008', '7.0', 'Ben Stiller'),
-    ('Knight and Day', '2010', '6.3', 'James Mangold'),
-    ('Rock of Ages', '2012', '5.9', 'Adam Shankman'),
-    ('Open Season', '2006', '6.1', 'Roger Allers'),
-    ('The Butterfly Effect', '2004', '7.6', 'Eric Bress'),
-    ('Jobs', '2013', '6.0', 'Joshua Michael Stern')
+    ('Vanilla Sky', '2001', '6.9', 'Cameron', 'Crowe'),
+    ('Top Gun', '1986', '6.9', 'Tony', 'Scott'),
+    ('Risky Business', '1983', '6.8', 'Paul', 'Brickman'),
+    ('Cocktail', '1986', '5.9', 'Roger', 'Donaldson'),
+    ('Tropic Thunder', '2008', '7.0', 'Ben', 'Stiller'),
+    ('Knight and Day', '2010', '6.3', 'James', 'Mangold'),
+    ('Rock of Ages', '2012', '5.9', 'Adam', 'Shankman'),
+    ('Open Season', '2006', '6.1', 'Roger', 'Allers'),
+    ('The Butterfly Effect', '2004', '7.6', 'Eric', 'Bress'),
+    ('Jobs', '2013', '6.0', 'Joshua', 'Stern')
 ;
 -- Create a query that puts the names together.\
 SELECT CONCAT(Director_First, ' ', Director_Last) AS "Full Name",Title, ReleaseDate,Rating FROM movies2;
@@ -111,14 +111,11 @@ CREATE TABLE cars2 (
     Year INT,
     Make VARCHAR(100),
     Model VARCHAR(100),
-    Trim VARCHAR(100)
 );
-INSERT INTO cars2
- 	(Year, Make, Model, Trim)
-VALUES
-	(2019, 'Honda','CRV', 'EX-L'),
-    (2021, 'Toyota','Corolla', 'LX'),
-    (2020, 'Kia','Sportage', 'SX')
+INSERT INTO cars2 (Year, Make, Model) VALUES
+	(2022, 'RAM','Laramie'),
+    (2020, 'Toyota','Camry'),
+    (2018, 'Chevy','Malibu')
 ;
 -- Write a query to add in prices and colors for each of these cars
 ALTER TABLE cars2
@@ -126,13 +123,13 @@ ADD COLUMN Color VARCHAR(20),
 ADD COLUMN Price DECIMAL(10,2);
 
 UPDATE cars2
-SET Color = "Pearl White", Price = 32876.00
+SET Color = "White", Price = 65000.00
 WHERE Id = 1;
 UPDATE cars2
-SET Color = "Cobalt Blue", Price = 21349.00
+SET Color = "Black", Price = 40000.00
 WHERE Id = 2;
 UPDATE cars2
-SET Color = "Black", Price = 29980.00
+SET Color = "Silver", Price = 15000.00
 WHERE Id = 3;
 -- Write a query to put the Make and Model together in one column
 SELECT CONCAT(Make, ' ', Model) AS "Make and Model", Year, Color, Price FROM cars2;
@@ -140,15 +137,13 @@ SELECT CONCAT(Make, ' ', Model) AS "Make and Model", Year, Color, Price FROM car
 SELECT Make, COUNT(*)
 FROM cars2
 GROUP BY Make
-HAVING COUNT(*) > 0; -- I did 0 because I only have 1 car for each make
+HAVING COUNT(*) > 0;
 
--- Adding cars to test COUNT
-INSERT INTO cars (Year, Make, Model) VALUES
+INSERT INTO cars2 (Year, Make, Model) VALUES
 	(2022, 'RAM','Laramie'),
     (2020, 'Toyota','Camry'),
     (2018, 'Chevy','Malibu')
 ;
-
 -- Create a new query that adds an additional column to the results to show how many cars have the same Make.
 SELECT Make, COUNT(*)
 FROM cars2
